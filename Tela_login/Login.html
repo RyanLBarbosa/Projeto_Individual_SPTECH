@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="boxPai">
+<header class="nav_bar">
+    <div class="logo">
+        <a href="index.html">
+            <img src="logo.png" alt="Logotipo">
+        </a>
+    </div>
+
+    <nav class="navegacao">
+        <ul>
+            <li><a href="index.html#cenerio">Cenário</a></li>
+            <li><a href="index.html#instante">Instante</a></li>
+            <li><a href="index.html#lente">Lente</a></li>
+            <li><a href="index.html#manifesto">Manifesto</a></li>
+        </ul>
+    </nav>
+
+    <div class="botoes">
+        <button class="cadastro" onclick="window.location.href='Cadastro.html'">Cadastro</button>
+        <button class="login" onclick="window.location.href='login.html'">Login</button>
+    </div>
+</header>
+        <div class="container">
+
+            <div class="painel-direito">
+                <div class="formulario">
+                    <p class="bem_vindo">Bem-vindo de volta!</p>
+
+                    <p class="campos">E-mail</p>
+                    <input type="text" id="email_ipt" class="campos_input">
+
+                    <p class="campos">Senha</p>
+                    <input type="password" id="senha_ipt" class="campos_input">
+
+                    <div id="login_efetuado"></div>
+                    <div id="login_negado"></div>
+                        <button class="botao_entrar" onclick="entrar()">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    let tentativas = 3
+
+    function entrar() {
+        let senha_user = senha_ipt.value
+        let senha = "Urubu100"
+        let email = email_ipt.value
+
+        // Validação de bloqueio do usuário
+        if (tentativas <= 0) {
+            alert(`Acesso bloqueado!`)
+            login_negado.innerHTML = `Login bloqueado!`
+        }
+
+        // Validação do campo E-MAIL vazio
+        else if (email.length == 0) {
+            alert(`Insira um e-mail no campo E-MAIL!`)
+        }
+
+        // Validação do formato do E-MAIL
+        else if (!email.includes("@")) {
+            alert(`Seu E-MAIL precisa conter "@"!`)
+        }
+
+        // Validação do campo SENHA vazio
+        else if (senha_user.length == 0) {
+            alert(`Insira uma senha no campo SENHA!`)
+        }
+
+        // Validação de SENHA incorreta
+        else if (senha_user != senha) {
+            tentativas--
+
+            if (tentativas == 0) {
+                alert(`Acesso bloqueado! Você esgotou suas tentativas.`)
+                login_negado.innerHTML = `Login bloqueado!`
+            }
+            else {
+                alert(`Senha incorreta! Restam ${tentativas} tentativas.`)
+            }
+        }
+
+        // Validação de SENHA correta
+        else if (senha_user == senha) {
+            login_efetuado.innerHTML = `Login efetuado com sucesso!`
+            tentativas = 3
+            window.location.href = "../Site_Dash_Geral/dashboard_geral.html";
+        }
+    }
+
+</script>
