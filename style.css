@@ -255,6 +255,43 @@ max-width: 1200px;
   filter: grayscale(0%)
 }
 
+.carrossel-instantes img{
+  width: 250px;
+  margin: 0 10px;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
 
+.carrossel-instantes{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  animation: rolagem-infinita 30s linear infinite;
+  width: max-content;
+}
+.carrossel-instantes:hover{
+  animation-play-state: paused;
+}
+.titulo-instantes{
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 5px;
+}
 
-
+.subtitulo-instantes{
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.carrossel{
+  overflow: hidden;
+  width: 100%;
+}
+@keyframes rolagem-infinita {
+  0%{
+    transform: translateX(0);
+  }
+  100%{
+    transform: translateX(-50%);
+  }
+}
