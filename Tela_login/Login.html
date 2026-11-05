@@ -10,27 +10,27 @@
 
 <body>
     <div class="boxPai">
-<header class="nav_bar">
-    <div class="logo">
-        <a href="index.html">
-            <img src="logo.png" alt="Logotipo">
-        </a>
-    </div>
+        <header class="nav_bar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Logotipo">
+                </a>
+            </div>
 
-    <nav class="navegacao">
-        <ul>
-            <li><a href="index.html#cenerio">Cenário</a></li>
-            <li><a href="index.html#instante">Instante</a></li>
-            <li><a href="index.html#lente">Lente</a></li>
-            <li><a href="index.html#manifesto">Manifesto</a></li>
-        </ul>
-    </nav>
+            <nav class="navegacao">
+                <ul>
+                    <li><a href="index.html#cenerio">Cenário</a></li>
+                    <li><a href="index.html#instante">Instante</a></li>
+                    <li><a href="index.html#lente">Lente</a></li>
+                    <li><a href="index.html#manifesto">Manifesto</a></li>
+                </ul>
+            </nav>
 
-    <div class="botoes">
-        <button class="cadastro" onclick="window.location.href='Cadastro.html'">Cadastro</button>
-        <button class="login" onclick="window.location.href='login.html'">Login</button>
-    </div>
-</header>
+            <div class="botoes">
+                <button class="cadastro" onclick="window.location.href='Cadastro.html'">Cadastro</button>
+                <button class="login" onclick="window.location.href='login.html'">Login</button>
+            </div>
+        </header>
         <div class="container">
 
             <div class="painel-direito">
@@ -45,7 +45,7 @@
 
                     <div id="login_efetuado"></div>
                     <div id="login_negado"></div>
-                        <button class="botao_entrar" onclick="entrar()">Entrar</button>
+                    <button class="botao_entrar" onclick="entrar()">Entrar</button>
                 </div>
             </div>
         </div>
@@ -56,53 +56,51 @@
 
 <script>
 
-    let tentativas = 3
+let tentativas = 3
 
-    function entrar() {
-        let senha_user = senha_ipt.value
-        let senha = "Urubu100"
-        let email = email_ipt.value
+function entrar() {
+    let senha_user = senha_ipt.value
+    let senha = "Urubu100"
+    let email = email_ipt.value
 
-        // Validação de bloqueio do usuário
-        if (tentativas <= 0) {
-            alert(`Acesso bloqueado!`)
-            login_negado.innerHTML = `Login bloqueado!`
-        }
+    if (tentativas <= 0) {
+        alert(`Acesso地位 bloqueado!`)
+        login_negado.innerHTML = `Login bloqueado!`
+        return;
+    }
 
-        // Validação do campo E-MAIL vazio
-        else if (email.length == 0) {
-            alert(`Insira um e-mail no campo E-MAIL!`)
-        }
+    let valores = [email, senha_user];
+    let mensagens = [`Insira um e-mail no campo E-MAIL!`, `Insira uma senha no campo SENHA!`];
 
-        // Validação do formato do E-MAIL
-        else if (!email.includes("@")) {
-            alert(`Seu E-MAIL precisa conter "@"!`)
-        }
-
-        // Validação do campo SENHA vazio
-        else if (senha_user.length == 0) {
-            alert(`Insira uma senha no campo SENHA!`)
-        }
-
-        // Validação de SENHA incorreta
-        else if (senha_user != senha) {
-            tentativas--
-
-            if (tentativas == 0) {
-                alert(`Acesso bloqueado! Você esgotou suas tentativas.`)
-                login_negado.innerHTML = `Login bloqueado!`
-            }
-            else {
-                alert(`Senha incorreta! Restam ${tentativas} tentativas.`)
-            }
-        }
-
-        // Validação de SENHA correta
-        else if (senha_user == senha) {
-            login_efetuado.innerHTML = `Login efetuado com sucesso!`
-            tentativas = 3
-            window.location.href = "../Site_Dash_Geral/dashboard_geral.html";
+    for (let i = 0; i < valores.length; i++) {
+        if (valores[i].length == 0) {
+            alert(mensagens[i]);
+            return;
         }
     }
+
+    if (!email.includes("@")) {
+        alert(`Seu E-MAIL precisa conter "@"!`)
+    }
+
+    else if (senha_user != senha) {
+        tentativas--
+
+        if (tentativas == 0) {
+            alert(`Acesso bloqueado! Você esgotou suas tentativas.`)
+            login_negado.innerHTML = `Login bloqueado!`
+        }
+        else {
+            alert(`Senha incorreta! Restam ${tentativas} tentativas.`)
+        }
+    }
+
+    else if (senha_user == senha) {
+        login_efetuado.innerHTML = `Login efetuado com sucesso!`
+        tentativas = 3
+        window.location.href = "../Site_Dash_Geral/dashboard_geral.html";
+    }
+}
+
 
 </script>
