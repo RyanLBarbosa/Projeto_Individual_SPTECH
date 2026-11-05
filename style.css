@@ -149,7 +149,6 @@ body {
   border-radius: 10px;
 }
 
-/* TESTE */
 .recursos {
   display: flex;
   align-items: center;
@@ -158,6 +157,7 @@ body {
   padding: 80px 6%;
   max-width: 1400px;
   margin: 0 auto;
+  background-color: #ebe7e7;
 }
 
 .esquerda-recursos {
@@ -217,78 +217,44 @@ body {
   border-radius: 10px;
   font-size: 15px;
 }
-.card {
-  padding: 32px;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
 
-.card-icone {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.lente{
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 18px;
+  align-items: center;
+  text-align: center;
+  padding: 70px;
 }
 
-.card h3 {
+.titulo-lente{
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.subtitulo-lente{
   font-size: 20px;
-  font-weight: 700;
+  margin-bottom: 20px;
 }
 
-.card p {
-  font-size: 14px;
-  line-height: 1.5;
+.imagens img{
+  width: 300px;
+  border-radius: 20px;
+  margin: 20px;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  
 }
 
-.card-ritmo {
-  background-color: #c0532b;
-  color: #ffffff;
+.imagens{
+max-width: 1200px;
 }
 
-.card-ritmo .card-icone {
-  background-color: rgba(255, 255, 255, 0.2);
+.imagens img:hover{
+  filter: grayscale(0%)
 }
 
-.card-conexao {
-  background-color: #f2ebd9;
-  color: #1a1a1a;
-}
-
-.card-conexao .card-icone {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.card-conexao p, 
-.card-jornada p {
-  color: #666666;
-}
-
-.card-jornada {
-  background-color: #f2ebd9;
-  color: #1a1a1a;
-}
-
-.card-jornada .card-icone {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.card-celebracao {
-  background-color: #111111;
-  color: #ffffff;
-}
-
-.card-celebracao .card-icone {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.card-celebracao p {
-  color: #cccccc;
-}
 
 
 
