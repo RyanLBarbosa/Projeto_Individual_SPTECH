@@ -83,6 +83,7 @@ body {
   color: #f4eded;
   margin-bottom: 24px;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .titulo-principal p {
@@ -110,7 +111,7 @@ body {
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
 }
 
-.meio button {
+.meio button { 
   background-color: #b8b2b2;
   color: #ffffff;
   border: none;
@@ -120,7 +121,6 @@ body {
   font-weight: 500;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(98, 97, 97, 0.2);
-
 }
 
 .meio button:hover {
@@ -254,11 +254,12 @@ max-width: 1200px;
 .imagens img:hover{
   filter: grayscale(0%)
 }
-
+.instantes{
+  margin-bottom: 100px;
+}
 .carrossel-instantes img{
   width: 250px;
   margin: 0 10px;
-  flex-shrink: 0;
   border-radius: 20px;
 }
 
@@ -294,4 +295,64 @@ max-width: 1200px;
   100%{
     transform: translateX(-50%);
   }
+}
+
+.rodape{
+  background-color: black;
+  padding:15px;
+  display: flex;
+  align-items: center;
+}
+
+.rodape img{
+  margin-left: 20px;
+  width: 150px;
+  filter: invert(100%);
+  display: block;
+}
+
+.nav_rodape{
+  margin-left: 100px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.nav_rodape ul {
+  display: flex;
+  list-style: none; 
+  gap: 40px;       
+}
+
+.nav_rodape ul li a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-size: 15px;
+  font-weight: 500;
+}
+.explorar{
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.bot_rod{
+  width: 60px;
+  height: 30px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+
+.rodape button{
+   align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.p {
+  font-weight: 800;
+  text-decoration: underline;
 }
