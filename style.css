@@ -261,6 +261,9 @@ max-width: 1200px;
   width: 250px;
   margin: 0 10px;
   border-radius: 20px;
+  aspect-ratio: 3/5;
+  object-fit: cover;
+  object-position: top;
 }
 
 .carrossel-instantes{
@@ -356,3 +359,24 @@ max-width: 1200px;
   font-weight: 800;
   text-decoration: underline;
 }
+
+.projeto-esquerda{
+  padding: 50px;
+}
+.projeto-direita img{
+  width: 500px;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  mask-image: linear-gradient(to left, black 60%, transparent 100%);
+}
+.projeto-direita{
+  padding: 25px;
+}
+.projeto-pai{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:1
+}
+
