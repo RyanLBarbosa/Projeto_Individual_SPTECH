@@ -10,26 +10,26 @@
 
 <body>
     <header class="nav_bar">
-    <div class="logo">
-        <a href="index.html">
-            <img src="logo.png" alt="Logotipo">
-        </a>
-    </div>
 
-    <nav class="navegacao">
-        <ul>
-            <li><a href="index.html#cenario">Cenário</a></li>
-            <li><a href="index.html#instante">Instante</a></li>
-            <li><a href="index.html#lente">Lente</a></li>
-            <li><a href="index.html#manifesto">Manifesto</a></li>
-        </ul>
-    </nav>
+        <div class="logo">
+            <img src="assets/LENZ.png" alt="Logotipo">
+        </div>
 
-    <div class="botoes">
-        <button class="cadastro" onclick="window.location.href='Cadastro.html'">Cadastro</button>
-        <button class="login" onclick="window.location.href='login.html'">Login</button>
-    </div>
-</header>
+        <nav class="navegacao">
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#projeto">O Projeto</a></li>
+                <li><a href="#tempo">Tempo</a></li>
+                <li><a href="#lente">Lente</a></li>
+                <li><a href="#instantes">Instantes</a></li>
+            </ul>
+        </nav>
+
+        <div class="botoes">
+            <a href="Tela_cadastro/Cadastro.html"><button class="cadastro">Cadastro</button></a>
+            <a href="Tela_login/Login.html"><button class="login">Login</button></a>
+        </div>
+    </header>
     <div class="boxPai">
         <div class="container">
                 <div class="logo">
@@ -49,9 +49,6 @@
 
                     <p class="campos">Telefone</p>
                     <input type="text" id="telefone_ipt" class="campos_input">
-
-                    <p class="campos">Token de acesso</p>
-                    <input type="text" id="token_ipt" class="campos_input">
 
                     <div class="campos-senha">
                         <div>
@@ -84,7 +81,6 @@
         let confirmacao_senha = confirmacao_ipt.value
         let cpf = CPF_ipt.value
         let telefone = telefone_ipt.value
-        let token = token_ipt.value
 
         let numero_validacao = (
             senha.includes('0') || senha.includes('1') ||
@@ -129,14 +125,6 @@
             alert(`Preencha o campo TELEFONE!`)
         }
 
-        // Validações do campo TOKEN
-        else if (token.length == 0) {
-            alert(`Preencha o campo TOKEN DE ACESSO!`)
-        }
-        else if (token != 'TESTE') {
-            alert(`Token de acesso inválido!`)
-        }
-
         // Validações do campo SENHA
         else if (senha.length == 0) {
             alert(`Defina uma SENHA!`)
@@ -175,7 +163,6 @@
             telefone_ipt.value = ''
             senha_ipt.value = ''
             confirmacao_ipt.value = ''
-            token_ipt.value = ''
         }
     }
 
