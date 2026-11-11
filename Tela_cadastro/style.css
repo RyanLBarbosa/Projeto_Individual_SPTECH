@@ -1,38 +1,93 @@
 @import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
 
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0px;
-    background-color: #FFFDF4;
+.nav_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;           
+  padding: 20px 6%;
+  background-color: #ffffff;
+  border-bottom: 3px solid #d9d8d8;
 }
 
+.logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.navegacao ul {
+  display: flex;
+  align-items: center;
+  list-style: none; 
+  gap: 40px;       
+}
+
+.navegacao ul li a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-size: 17px;
+  font-weight: 400;
+  font-family: outfit;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.botoes button {
+  font-size: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+
 .boxPai {
+    margin: 0;
     width: 100%;
+    min-height: 86vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.header {
+.boxPai::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 32px;
-    background-color: #063354;
-    font-family: Junge;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
+    height: 100%;
+    z-index: -1;
+    background-image: url(/home/ryan/Projeto_Individual_SPTECH/assets/tst3.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px) brightness(80%);
+    
 }
+
 
 .menu {
     width: 100%;
     height: 69px;
-    background-color: #FFFDF4;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,12 +122,6 @@ body {
     font-size: medium;
 }
 
-.logo {
-    position: absolute;
-    top: 17px;
-    left: 0px;
-}
-
 .painel-direito {
     width: 100%;
     max-width: 450px;
@@ -90,49 +139,24 @@ body {
     flex-direction: column;
 }
 
-.textos_painel_esquerdo {
-    width: 90%;
-}
-
-.p1_txt {
-    font-family: Ledger;
-    font-size: 20px;
-    margin: 0px;
-    color: #FFFDF4;
-}
-
-.p2_txt {
-    font-family: Junge;
-    font-size: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #FFFDF4;
-    font-weight: 200;
-}
-
-.p3_txt {
-    font-family: Inter;
-    font-size: 20px;
-    margin: 0px;
-    font-weight: 200;
-    color: #FFFDF4;
-}
 
 .campos {
-    font-family: Inter;
+    font-family: OUTFIT;
     margin: 0px 0px 5px 0px;
     font-weight: 400;
-    color: #070707;
+    color: #efefef;
     font-size: 20px;
-}
+}   
 
 .bem_vindo {
-    font-family: Junge;
-    font-size: 42px;
-    font-weight: 200;
-    color: #090909;
+    font-family: Ms Madi;
+    font-size: 72px;
+    font-weight: 600;
+    color: #faf8f8;
     margin: 0 0 15px 0;
     text-align: center;
+    margin-bottom: 40px;
+    
 }
 
 input {
@@ -148,11 +172,11 @@ input {
 }
 
 .botao_conta {
-    background-image: linear-gradient(to right, #5b2b0e, #af5412);
+    background-color: black;
     border: none;
     color: #ffffff;
     border-radius: 10px;
-    font-family: Inter;
+    font-family: outfit;
     font-size: 20px;
     margin-top: 15px;
     margin-bottom: 0px;
@@ -177,15 +201,6 @@ button {
     width: 100%;
     height: 50px;
     cursor: pointer;
-}
-
-.ou_txt {
-    color: #8197A7;
-    font-family: Inter;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 8px 0;
 }
 
 .campos-senha {
@@ -215,63 +230,27 @@ button {
     font-size: 20px;
 }
 
-.nav_bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;           
-  padding: 20px 6%;
-  background-color: #fcf9f5;
-  border-bottom: solid #D8D8D8 1px;
-  width: 100%;
-}
-
-.logo {
-  position: static; 
-}
-
-.logo img {
-  height: 32px;
-  width: auto;
-  display: block;
-}
-
-.navegacao ul {
-  display: flex;
-  align-items: center;
-  list-style: none; 
-  gap: 40px;       
-}
-
-.navegacao ul li a {
-  text-decoration: none;
-  color: #4a4a4a;
+.botoes button {
   font-size: 15px;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.botoes {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.botoes .cadastro {
+.cadastro {
   background: none;
   border: none;
   color: #4a4a4a;
   padding: 12px 16px;
-  width: auto;
-  height: auto;
-  cursor: pointer;
+  font-family: outfit;
 }
 
-.botoes .login {
-  background-color: #c0532b;
+.login {
+  background-color: #090909;
   color: #ffffff;
   border: none;
   padding: 12px 28px;
-  border-radius: 25px;
-  width: auto;
-  height: auto;
-  cursor: pointer;
+  border-radius: 10px;
+  font-family: outfit;
 }
+
+
