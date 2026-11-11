@@ -18,65 +18,77 @@
 
         <nav class="navegacao">
             <ul>
-                <li><a href="cenario">Cenário</a></li>
-                <li><a href="projeto">O projeto</a></li>
-                <li><a href="instante">Instante</a></li>
-                <li><a href="lente">Lente</a></li>
-                <li><a href="instantes">Instantes</a></li>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#projeto">O Projeto</a></li>
+                <li><a href="#tempo">Tempo</a></li>
+                <li><a href="#lente">Lente</a></li>
+                <li><a href="#instantes">Instantes</a></li>
             </ul>
         </nav>
 
         <div class="botoes">
-            <button class="cadastro">Cadastro</button>
-            <button class="login">Login</button>
+            <a href="Tela_cadastro/Cadastro.html"><button class="cadastro">Cadastro</button></a>
+            <a href="Tela_login/Login.html"><button class="login">Login</button></a>
         </div>
     </header>
 
-    <!--Primeira sessão -> Hero-->
-    <section class="hero">
+    <!--Primeira sessão -> Hero -->
+    <section id="hero" class="hero">
 
         <!--Meio-->
         <div class="meio">
             <div class="moldura">
                 <h1 class="titulo-principal">
-                    A Vida Corre. <p> A fotografia celebra.</p>
+                    A vida corre. <p> A fotografia celebra!</p>
                 </h1>
             </div>
             <p class="descricao">Em um mundo cheio de movimento, fotografar é transformar instantes em memórias
-             eternas e brilhantes.</p>
-            <button>Sinta o momento -></button>
+                eternas e brilhantes.</p>
+                <a href="#projeto"><button>Entenda o projeto ➜</button></a>
+            
         </div>
     </section>
 
-    <!--Segunda seção -> O Projeto-->
-    <section class="projeto">
-    <div class="projeto-pai">
-    <div class="projeto-esquerda">
-     <h1 class="titulo-projeto">
-        Sobre o projeto
-     </h1>
+    <!--Segunda seção -> O Projeto -->
+<section  id="projeto" class="projeto">
+    <div class="projeto-container">
+        
+        <div class="projeto-header">
+            <p class="tag-projeto">SOBRE O PROJETO</p>
+            <h1 class="titulo-projeto">O tempo passa.<br>A memória fica.</h1>
+        </div>
 
-     <h3>Já imaginou poder voltar no tempo e reviver seus melhores momentos sempre que quiser? Suas fotos tornam isso possível.</h3> <br> <br>
-        Criado por Ryan Leão, a Lenz nasce de uma paixão pela fotografia, a vontade de poder morar mais tempo nos momentos felizes da vida,
-        a sensação de poder revisitar um pedaço do tempo ou guardar todas as emoções que um instante do tempo transmitiu. 
-        <br> <br> Depoimento do criador: <br> <br>
-        <i>"Conheci o mundo da arte através da minha irmã e mãe, que sempre me incentivaram a ver filmes, ler livros,
-            desenhar e desfrutar do melhor desse mundo. Quando eu ainda era criança, conheci a fotografia por conta 
-            de uma pequena camêra que minha mãe tinha, com ela pude fotografar os momentos mais bonitos da minha infância,
-            e sou muito grato a minha familia por ter me apresentado esse universo que me possibilitam de poder
-            revisitar o passado!"</i>
-          </p>
+        <div class="projeto-texto">
+            <h3 class="subtitulo-projeto">Já imaginou poder voltar no tempo e reviver seus melhores momentos sempre que quiser?</h3>
+            <p class="paragrafo-projeto">Criada por Ryan Leão, a Lenz nasce da paixão por eternizar sentimentos. Mais do que registrar imagens, nosso propósito é permitir que você more mais tempo nos momentos felizes e guarde toda a emoção que o tempo não pode apagar.</p>
+        </div>
+
+        <div class="projeto-imagem">
+            <img src="assets/teste.png" alt="Ryan Leão">
+        </div>
+
+        <div class="projeto-depoimento">
+            <div class="depoimento-subtitulo">
+                <p class="tag-depoimento">POR TRÁS DA LENTE</p>
+            </div>
+            <div class="depoimento-conteudo">
+                <p class="texto-depoimento">
+                    'Conheci o mundo da arte através da minha irmã e mãe, que sempre me incentivaram a ver filmes, ler livros, desenhar e desfrutar do melhor desse mundo artistico. 
+                    Quando eu era criança, minha mãe tinha uma camêra fotografica simples, que possibilitou que nós registrassemos muitos momentos da minha infância.
+                    Sou muito grato à minha família por ter me apresentado esse universo que me possibilita poder revisitar o passado!'
+                </p>
+                <div class="autor-depoimento">
+                    <h2 class="nome-autor">Ryan Leão</h2>
+                    <p class="cargo-autor">Criador da Lenz</p>
+                </div>
+            </div>
+        </div>
+
     </div>
+</section>
 
-
-    <div class="projeto-direita">
-        <img src="assets/IMG-20261108-WA0011.jpg.jpeg" alt="foto_criador">
-    </div>
-    </div>
-    </section>
-
-    <!--Segunda seção -> Cenário -->
-    <section class="recursos">
+    <!--Terceira seção - Tempo -->
+    <section id="tempo"  class="recursos">
 
         <div class="esquerda-recursos">
             <img src="assets/foto-hero.png" alt="foto_cenario">
@@ -87,17 +99,18 @@
                 Tudo pulsa, tudo se cruza, tudo acontece agora.
             </h2>
             <p class="descricao-cenario">
-                Nossos dias correm entre mensagens, trajetos e encontros inesperados. É um fluxo veloz - e fascinante.
+                Nossos dias correm entre mensagens, trajetos e encontros inesperados. É um fluxo veloz e fascinante.
                 No meio dessa corrente existem fagulhas de beleza: um olhar, uma risada, uma luz atravessando a janela.
-                Já imaginou poder guardar os melhores momentos pra sempre?  <br>Com uma fotografia você <b><u>pode!</u></b>
+                <br><br>Já imaginou poder guardar os melhores momentos pra sempre? <br>Com uma fotografia você
+                <b><u>pode!</u></b>
             </p>
-            <button>Ver as lentes -></button>
+           <a href="#lente"><button>Ver as lentes ➜</button></a> 
         </div>
         </div>
     </section>
 
-    <!--Terceira seção -> Lente -->
-    <section class="lente">
+    <!--Quarta seção -> Lente -->
+    <section id="lente" class="lente">
         <div class="meio-lente">
             <h2 class="titulo-lente">O TEMPO SOB AS LENTES</h2>
             <p class="subtitulo-lente">
@@ -114,8 +127,8 @@
     </section>
 </body>
 
-<!--Quarta seção -> -->
-<section class="instantes">
+<!--Quinta seção -> instantes -->
+<section id="instantes" class="instantes">
 
     <h2 class="titulo-instantes">INSTANTES VIVOS</h2>
 
@@ -123,7 +136,7 @@
 
     <div class="carrossel">
 
-    <div class="carrossel-instantes">
+        <div class="carrossel-instantes">
 
             <img src="assets/foto_c1.jpeg" alt="foto_c1">
             <img src="assets/foto_c2.jpeg" alt="foto_c2">
@@ -140,25 +153,28 @@
             <img src="assets/foto_c6.jpeg" alt="foto_c6">
 
 
-    </div>
+        </div>
     </div>
 </section>
 
 <!--Rodapé da página-->
 <footer class="rodape">
-  <div class="logo-rodape">
-    <img src="assets/LENZ.png" alt="logo">
-  </div>
+    <div class="logo-rodape">
+        <img src="assets/LENZ.png" alt="logo">
+    </div>
 
-  <nav class="nav_rodape">
-    <ul class="menu-links">
-      <li><a href="#cenario">Cenário</a></li>
-      <li><a href="#instante">Instante</a></li>
-      <li><a href="#lente">Lente</a></li>
-      <li><a href="#instantes">Instantes</a></li>
-    </ul>
-  </nav>
+        <nav class="navegacao">
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#projeto">O Projeto</a></li>
+                <li><a href="#tempo">Tempo</a></li>
+                <li><a href="#lente">Lente</a></li>
+                <li><a href="#instantes">Instantes</a></li>
+            </ul>
+        </nav>
 
-  <button class="bot_rod">Contato</button>
+
+    <button class="bot_rod">Contato</button>
 </footer>
+
 </html>
