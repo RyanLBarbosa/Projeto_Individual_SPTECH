@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENZ - Dashboard</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link
+        href="https://googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style_acesso.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <div class="logo">
+            <img src="assets/LENZ.png" alt="Logotipo">
+        </div>
+
+        <p class="saudacao">Olá, usuário</p>
+
+        <nav class="navegacao">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#inspiracoes">Inspirações</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#dashboard" class="ativo">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <div class="botoes">
+            <a href="index.html" class="sair">
+                Sair
+                <img src="?" alt="icon-sair">
+            </a>
+        </div>
+    </aside>
+
+    <main class="conteudo-principal">
+        <header class="cabecalho">
+            <h1>Atividade Fotográfica Anual</h1>
+        </header>
+
+        <section class="cards-resumo">
+            <div class="card">
+                <h3>Quantidade de fotos na galeria</h3>
+                <p class="destaque"><b>105</b> fotos registradas</p>
+                <span class="subtexto">+25 adicionadas nesse mês</span>
+            </div>
+
+            <div class="card">
+                <h3>Sequência Semanal (Streak)</h3>
+                <p class="destaque"><span class="verde">5 Semanas</span> adicionando<br>novas fotos a galeria</p>
+            </div>
+
+            <div class="card">
+                <h3>Média de fotos por mês</h3>
+                <p class="destaque"><b>21</b> Fotos por mês</p>
+                <span class="subtexto">15% a mais que o mês anterior</span>
+            </div>
+        </section>
+
+        <section class="area-graficos">
+
+            <div class="box-grafico">
+                <canvas id="grafico2"></canvas>
+            </div>
+
+            <div class="box-grafico">
+                <canvas id="grafico1"></canvas>
+            </div>
+
+        </section>
+    </main>
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Define a fonte padrão
+    Chart.defaults.font.family = 'outfit';
+
+    const grafico1 = document.getElementById('grafico1');
+
+    new Chart(grafico1, {
+        type: 'bar',
+        data: {
+            labels: ['Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.'],
+            datasets: [{
+                label: 'Quantidade de fotos por mês',
+                data: [25, 14, 16, 10, 5, 23, 12, 10, 10, 20, 14, 2],
+                backgroundColor: 'rgba(181, 217, 167, 0.6)',
+                borderColor: 'rgba(87, 148, 64, 0.6)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: true
+                    }
+                }
+            }
+        }
+    });
+
+    const grafico2 = document.getElementById('grafico2');
+
+    new Chart(grafico2, {
+        type: 'bar',
+        data: {
+            labels: ['Fotografia de rua', 'Paisagens e ambientes', 'Comemorações', 'Esportiva', 'Retrato'],
+            datasets: [{
+                label: 'Estilos de foto mais explorados',
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: 'rgba(181, 217, 167, 0.6)',
+                borderColor: 'rgba(87, 148, 64, 0.6)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: true
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+
+</script>
