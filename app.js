@@ -17,33 +17,37 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-// var avisosRouter = require("./src/routes/avisos");
-// var medidasRouter = require("./src/routes/medidas");
-// var aquariosRouter = require("./src/routes/aquarios");
-// var empresasRouter = require("./src/routes/empresas");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//Importa o arquivo de rota do usuario
+var fotoRouter = require("./src/routes/foto")
+
+
+//Tive que adicionar um novo limite para as imagens de camera serem inseridas,
+//caso contrario, as imagens seriam bloqueadas por serem muito pesadas
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-// app.use("/avisos", avisosRouter);
-// app.use("/medidas", medidasRouter);
-// app.use("/aquarios", aquariosRouter);
-// app.use("/empresas", empresasRouter);
+
+//Registra as rotas no Express. Qualquer chamada para /fotos/... será tratada pela fotoRouter dentro do app.use
+app.use("/fotos", fotoRouter);
+
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
-    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
-    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
-    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
-    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
-    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
-    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
+
+##       #######  ##    ##  #######
+##       ##       ###   ##      ##
+##       #####    ## #  ##     ##
+##       ##       ##  # ##    ##
+##       ##       ##   ###   ##
+#######  #######  ##    ##  #######
+
     \n\n\n                                                                                                 
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
