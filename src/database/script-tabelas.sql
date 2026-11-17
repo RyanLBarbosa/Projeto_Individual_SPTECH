@@ -1,15 +1,8 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
 CREATE DATABASE lenz;
 
 USE lenz;
 
+--Tabela de usuários, dados registrados do cadastro
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
@@ -19,5 +12,15 @@ CREATE TABLE usuario (
 	senha VARCHAR(50)
 );
 
+--Tabela de fotos vinculada ao usuário
+CREATE TABLE foto (
+    idFoto INT PRIMARY KEY AUTO_INCREMENT,
+    imagem VARCHAR(255) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    dtCaptura DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fk_usuario INT NOT NULL,
+    FOREIGN KEY (fk_usuario) REFERENCES usuario(id) ON DELETE CASCADE
+);
 
-select * from usuario;
+select * from foto;
