@@ -10,7 +10,7 @@ var database = require("../database/config");
 //Função de cadastro de imagem, inserindo no banco de dados seus metadados
 function cadastrar(nomeArquivo, categoria, descricao, fk_usuario) {
     var instrucaoSql = `
-        INSERT INTO foto (imagem, categoria, descricao, fk_usuario) 
+        INSERT INTO foto (imagem, fk_categoria, descricao, fk_usuario) 
         VALUES ('${nomeArquivo}', '${categoria}', '${descricao}', ${fk_usuario});`;
     return database.executar(instrucaoSql);
 }
@@ -19,14 +19,15 @@ function cadastrar(nomeArquivo, categoria, descricao, fk_usuario) {
 function listarPorUsuario(fk_usuario) {
     var instrucaoSql = `
         SELECT 
-            idFoto, 
-            imagem, 
-            categoria, 
-            descricao, 
-            DATE_FORMAT(dtCaptura, '%d/%m/%Y %H:%i') AS dtCaptura 
-        FROM foto 
-        WHERE fk_usuario = ${fk_usuario}
-        ORDER BY idFoto DESC;`;
+            f.idFoto, 
+            f.imagem,
+            c.nome as categoria , 
+            f.descricao, 
+            DATE_FORMAT(f.dtCaptura, '%d/%m/%Y %H:%i') AS dtCaptura 
+        FROM foto f
+        JOIN categoria c ON f.fk_categoria = c.idCategoria
+        WHERE f.fk_usuario = ${fk_usuario}
+        ORDER BY f.idFoto DESC;`;
     return database.executar(instrucaoSql);
 }
 
