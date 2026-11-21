@@ -196,9 +196,21 @@ body {
 /* CONTAINER INDIVIDUAL */
 .box-grafico {
     background-color: #EEEEEE;
-    height: 340px;
+    height: 370px;
     padding: 15px;
     position: relative;
     box-sizing: border-box;
     min-width: 0;
+
 }
+
+.box-grafico h3 {
+text-align: center;
+margin-bottom: 20px;
+font-family: Outfit;
+font-weight: 600;
+font-size: 22px;
+}
+
+
+
