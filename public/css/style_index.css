@@ -499,3 +499,7 @@ border-bottom: 3px solid #c6c3c3;
     margin: 0;
 }
 
+.rodape p{
+  color: white;
+  margin-left: 50px;
+}
