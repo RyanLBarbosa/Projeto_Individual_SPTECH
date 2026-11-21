@@ -87,11 +87,11 @@ PRINCIPAL - 3 coisas:
             <div class="campo">
                 <label for="selectCategoria">Categoria:</label>
                 <select id="selectCategoria">
-                    <option value="Foto de Rua">Foto de Rua</option>
-                    <option value="Paisagem e Ambiente">Paisagem e Ambiente</option>
-                    <option value="Retrato">Retrato</option>
-                    <option value="Moda">Moda</option>
-                    <option value="Esportiva">Esportiva</option>
+                    <option value="1">Foto de Rua</option>
+                    <option value="2">Paisagem e Ambiente</option>
+                    <option value="3">Retrato</option>
+                    <option value="4">Moda</option>
+                    <option value="5">Esportiva</option>
                 </select>
             </div>
 
@@ -125,113 +125,127 @@ PRINCIPAL - 3 coisas:
         </div>
     </div>
 </body>
+
 </html>
 
-    <script>
+<script>
 
-        //Variaveis globais
-        let listaFotos = []; //Serve como uma memoria temporaria, guarda fotos
-        let arquivoSelecionadoObjeto = null; //Guarda temporariamente o arquivo bruto da foto selecionada até que ele salve
+    //Variaveis globais
+    let listaFotos = []; //Serve como uma memoria temporaria, guarda fotos
+    let arquivoSelecionadoObjeto = null; //Guarda temporariamente o arquivo bruto da foto selecionada até que ele salve
 
-        window.onload = function () {
-            renderizarGaleria();
-        }; //Ativa assim que inicia a página, fazendo com que busque as fotos registradas no BD rapidamente
+    window.onload = function () {
+        const idUsuario = sessionStorage.ID_USUARIO;
+        const nomeUsuario = sessionStorage.NOME_USUARIO;
 
-        function abrirSeletorDeArquivo() {
-            document.getElementById('inputArquivo').click();
-        } //Simula um clique no campo "input type=file" para que o usuário escolha a imagem no computador
-
-        //Processa a pre-visualização da foto
-        function arquivoSelecionado(event) {
-            const arquivo = event.target.files[0]; //captura a foto que o usuário selecionou
-            if (!arquivo) return;
-
-            arquivoSelecionadoObjeto = arquivo;  //salva a foto na variavel global
-
-            //URL temporária no navegador apenas para a pré-visualização no modal
-            const previewUrl = URL.createObjectURL(arquivo);
-            document.getElementById('imgPreview').src = previewUrl; //mostra a foto na tela dentro do modal de upload
-
-            //Formatação de horario no padrão brasileiro
-            const agora = new Date();
-            const dataHoraAtual = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('textoDataHora').innerText = `Adicionada em: ${dataHoraAtual}`;
-            
-            //Abre a janela PopUp do Modal de confirmação do upload
-            document.getElementById('modalUpload').style.display = 'flex';
+        const elementoSaudacao = document.querySelector('.saudacao');
+        if (elementoSaudacao && nomeUsuario) {
+            elementoSaudacao.innerText = `Olá, ${nomeUsuario}`;
         }
 
-        //Função para fechar o modal de upload
-        function fecharModalUpload() {
-            document.getElementById('modalUpload').style.display = 'none';
-            document.getElementById('inputArquivo').value = "";
-            document.getElementById('inputDescricao').value = "";
-            document.getElementById('selectCategoria').selectedIndex = 0;
-            arquivoSelecionadoObjeto = null; //esconde o modal
+        if (!idUsuario) {
+            alert("Você precisa fazer login para ver a dashboard!!!")
+            window.location = "index.html";
+            return;
+        }
+        renderizarGaleria();
+    }; //Ativa assim que inicia a página, fazendo com que busque as fotos registradas no BD rapidamente
+
+    function abrirSeletorDeArquivo() {
+        document.getElementById('inputArquivo').click();
+    } //Simula um clique no campo "input type=file" para que o usuário escolha a imagem no computador
+
+    //Processa a pre-visualização da foto
+    function arquivoSelecionado(event) {
+        const arquivo = event.target.files[0]; //captura a foto que o usuário selecionou
+        if (!arquivo) return;
+
+        arquivoSelecionadoObjeto = arquivo;  //salva a foto na variavel global
+
+        //URL temporária no navegador apenas para a pré-visualização no modal
+        const previewUrl = URL.createObjectURL(arquivo);
+        document.getElementById('imgPreview').src = previewUrl; //mostra a foto na tela dentro do modal de upload
+
+        //Formatação de horario no padrão brasileiro
+        const agora = new Date();
+        const dataHoraAtual = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('textoDataHora').innerText = `Adicionada em: ${dataHoraAtual}`;
+
+        //Abre a janela PopUp do Modal de confirmação do upload
+        document.getElementById('modalUpload').style.display = 'flex';
+    }
+
+    //Função para fechar o modal de upload
+    function fecharModalUpload() {
+        document.getElementById('modalUpload').style.display = 'none';
+        document.getElementById('inputArquivo').value = "";
+        document.getElementById('inputDescricao').value = "";
+        document.getElementById('selectCategoria').selectedIndex = 0;
+        arquivoSelecionadoObjeto = null; //esconde o modal
+    }
+
+    //Envio oficial com FormData (Padrão SPTech)
+    function salvarNaGaleria() {
+        const categoria = document.getElementById('selectCategoria').value;
+        const descricao = document.getElementById('inputDescricao').value.trim() || "Sem descrição.";
+        const fk_usuario = sessionStorage.ID_USUARIO;
+
+        if (!arquivoSelecionadoObjeto) {
+            alert("Por favor, selecione uma imagem válida!");
+            return;
         }
 
-        //Envio oficial com FormData (Padrão SPTech)
-        function salvarNaGaleria() {
-            const categoria = document.getElementById('selectCategoria').value;
-            const descricao = document.getElementById('inputDescricao').value.trim() || "Sem descrição.";
-            const fk_usuario = sessionStorage.ID_USUARIO;
+        // FormData empacota o arquivo no campo "foto" esperado pelo Multer
+        const formData = new FormData();
+        formData.append("foto", arquivoSelecionadoObjeto);
+        formData.append("categoria", categoria);
+        formData.append("descricao", descricao);
+        formData.append("fk_usuario", fk_usuario);
 
-            if (!arquivoSelecionadoObjeto) {
-                alert("Por favor, selecione uma imagem válida!");
-                return;
+        /*
+        -FETCH: Função JS para fazer uma requisição para o servidor NodeJS
+        -Coleta as informações cadastradas, e envia ao servidor NodeJS via HTTP
+        -Após, envia ao multer que intercepta a foto e salva na pasta de arquivos
+        -Controller pega o nome gerado pelo Multer e chama a model, que insere no BD
+        -Se inserir corretamente, o servidor retorna 'Sucesso'
+        -Após isso, renderiza a galeria e fecha o modal de upload
+        */
+        fetch("/fotos/cadastrar", {
+            method: "POST",
+            body: formData
+        }).then(function (resposta) {
+            if (resposta.status == 201) {
+                renderizarGaleria();
+                fecharModalUpload();
+            } else {
+                alert("Houve um erro ao salvar a foto!");
             }
-
-            // FormData empacota o arquivo no campo "foto" esperado pelo Multer
-            const formData = new FormData();
-            formData.append("foto", arquivoSelecionadoObjeto);
-            formData.append("categoria", categoria);
-            formData.append("descricao", descricao);
-            formData.append("fk_usuario", fk_usuario);
-
-            /*
-            -FETCH: Função JS para fazer uma requisição para o servidor NodeJS
-            -Coleta as informações cadastradas, e envia ao servidor NodeJS via HTTP
-            -Após, envia ao multer que intercepta a foto e salva na pasta de arquivos
-            -Controller pega o nome gerado pelo Multer e chama a model, que insere no BD
-            -Se inserir corretamente, o servidor retorna 'Sucesso'
-            -Após isso, renderiza a galeria e fecha o modal de upload
-            */
-            fetch("/fotos/cadastrar", {
-                method: "POST",
-                body: formData
-            }).then(function (resposta) {
-                if (resposta.status == 201) {
-                    renderizarGaleria();
-                    fecharModalUpload();
-                } else {
-                    alert("Houve um erro ao salvar a foto!");
-                }
-            }).catch(function (erro) {
-                console.error("Erro na requisição cadastrar:", erro);
-            });
-        }
+        }).catch(function (erro) {
+            console.error("Erro na requisição cadastrar:", erro);
+        });
+    }
 
 
-        function renderizarGaleria() {
-            const fk_usuario = sessionStorage.ID_USUARIO;
-            const galeria = document.getElementById('galeriaContainer');
+    function renderizarGaleria() {
+        const fk_usuario = sessionStorage.ID_USUARIO;
+        const galeria = document.getElementById('galeriaContainer');
 
-            /*
-            -Dispara um GET enviando o ID do usuário no caminho
-            -Se retornar 200, encontrou fotos
-            -Guarda a lista de fotos na fariavel global listaFotos (lista)
-            -Limpa o container da galeria
-            -forEach: Percorre o array inserindo os cards de foto e puxando a foto do diretório de fotos
-            */
-            fetch(`/fotos/listar/${fk_usuario}`)
-                .then(function (resposta) {
-                    if (resposta.status == 200) {
-                        resposta.json().then(function (fotos) {
-                            listaFotos = fotos;
-                            galeria.innerHTML = "";
+        /*
+        -Dispara um GET enviando o ID do usuário no caminho
+        -Se retornar 200, encontrou fotos
+        -Guarda a lista de fotos na fariavel global listaFotos (lista)
+        -Limpa o container da galeria
+        -forEach: Percorre o array inserindo os cards de foto e puxando a foto do diretório de fotos
+        */
+        fetch(`/fotos/listar/${fk_usuario}`)
+            .then(function (resposta) {
+                if (resposta.status == 200) {
+                    resposta.json().then(function (fotos) {
+                        listaFotos = fotos;
+                        galeria.innerHTML = "";
 
-                            fotos.forEach(foto => {
-                                galeria.innerHTML += `
+                        fotos.forEach(foto => {
+                            galeria.innerHTML += `
                                 <div class="foto-card" onclick="abrirDetalhes(${foto.idFoto})">
                                     <img src="/assets/imgs/galeria/${foto.imagem}" alt="${foto.categoria}">
                                     <div class="foto-info">
@@ -240,67 +254,67 @@ PRINCIPAL - 3 coisas:
                                         <span class="foto-data">${foto.dtCaptura}</span>
                                     </div>
                                 </div>`;
-                            });
                         });
-                    } else if (resposta.status == 204) {
-                        galeria.innerHTML = "<p style='color: grey; text-align: center; grid-column: 1/-1;'>Nenhuma foto cadastrada ainda.</p>";
-                        listaFotos = [];
-                    }
-                })
-                .catch(function (erro) {
-                    console.error("Erro ao listar fotos:", erro);
-                });
-        }
-
-        /*
-        -Procura dentro do array a foto com o ID que o usuário clicou
-        -Preenche o card com a imagem, categoria, descricao e data que foi inserida a foto
-        -Atribui ao botão excluir a função de exclusao de fotos, passando o ID da foto como parametro
-        -Exibe o modal na tela com display = flex
-        */
-        function abrirDetalhes(idFoto) {
-            const foto = listaFotos.find(item => item.idFoto === idFoto);
-            if (!foto) return;
-
-            document.getElementById('detalheImg').src = `/assets/imgs/galeria/${foto.imagem}`;
-            document.getElementById('detalheCategoria').innerText = foto.categoria;
-            document.getElementById('detalheDescricao').innerText = foto.descricao;
-            document.getElementById('detalheData').innerText = `Adicionada em: ${foto.dtCaptura}`;
-
-            document.getElementById('btnConfirmarExclusao').onclick = function () {
-                excluirFoto(foto.idFoto);
-            };
-
-            document.getElementById('modalDetalhes').style.display = 'flex';
-        }
-
-        //Fecha modal de detalhes colocando o display como none
-        function fecharModalDetalhes() {
-            document.getElementById('modalDetalhes').style.display = 'none';
-        }
-
-        /*Função para excluir foto pelo ID da foto
-        confirm: exibe um alert no navegador perguntando se o usuário realmente deseja apagar a foto
-        -Se confirmar, através do fetch, envia a requisição delete contendo o id do usuário e idfoto
-        -Por fim, renderiza a galeria novamente e fecha o modal de detalhes
-        */
-        function excluirFoto(idFoto) {
-            const confirmou = confirm("Tem certeza que deseja excluir esta foto?");
-            if (!confirmou) return;
-
-            const fk_usuario = sessionStorage.ID_USUARIO;
-
-            fetch(`/fotos/deletar/${idFoto}/${fk_usuario}`, {
-                method: "DELETE"
-            }).then(function (resposta) {
-                if (resposta.status == 200) {
-                    renderizarGaleria();
-                    fecharModalDetalhes();
-                } else {
-                    alert("Erro ao excluir a foto do banco de dados!");
+                    });
+                } else if (resposta.status == 204) {
+                    galeria.innerHTML = "<p style='color: grey; text-align: center; grid-column: 1/-1;'>Nenhuma foto cadastrada ainda.</p>";
+                    listaFotos = [];
                 }
-            }).catch(function (erro) {
-                console.error("Erro ao deletar foto:", erro);
+            })
+            .catch(function (erro) {
+                console.error("Erro ao listar fotos:", erro);
             });
-        }
-    </script>
+    }
+
+    /*
+    -Procura dentro do array a foto com o ID que o usuário clicou
+    -Preenche o card com a imagem, categoria, descricao e data que foi inserida a foto
+    -Atribui ao botão excluir a função de exclusao de fotos, passando o ID da foto como parametro
+    -Exibe o modal na tela com display = flex
+    */
+    function abrirDetalhes(idFoto) {
+        const foto = listaFotos.find(item => item.idFoto === idFoto);
+        if (!foto) return;
+
+        document.getElementById('detalheImg').src = `/assets/imgs/galeria/${foto.imagem}`;
+        document.getElementById('detalheCategoria').innerText = foto.categoria;
+        document.getElementById('detalheDescricao').innerText = foto.descricao;
+        document.getElementById('detalheData').innerText = `Adicionada em: ${foto.dtCaptura}`;
+
+        document.getElementById('btnConfirmarExclusao').onclick = function () {
+            excluirFoto(foto.idFoto);
+        };
+
+        document.getElementById('modalDetalhes').style.display = 'flex';
+    }
+
+    //Fecha modal de detalhes colocando o display como none
+    function fecharModalDetalhes() {
+        document.getElementById('modalDetalhes').style.display = 'none';
+    }
+
+    /*Função para excluir foto pelo ID da foto
+    confirm: exibe um alert no navegador perguntando se o usuário realmente deseja apagar a foto
+    -Se confirmar, através do fetch, envia a requisição delete contendo o id do usuário e idfoto
+    -Por fim, renderiza a galeria novamente e fecha o modal de detalhes
+    */
+    function excluirFoto(idFoto) {
+        const confirmou = confirm("Tem certeza que deseja excluir esta foto?");
+        if (!confirmou) return;
+
+        const fk_usuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/fotos/deletar/${idFoto}/${fk_usuario}`, {
+            method: "DELETE"
+        }).then(function (resposta) {
+            if (resposta.status == 200) {
+                renderizarGaleria();
+                fecharModalDetalhes();
+            } else {
+                alert("Erro ao excluir a foto do banco de dados!");
+            }
+        }).catch(function (erro) {
+            console.error("Erro ao deletar foto:", erro);
+        });
+    }
+</script>
