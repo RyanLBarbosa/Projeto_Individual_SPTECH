@@ -21,6 +21,8 @@ var usuarioRouter = require("./src/routes/usuarios");
 //Importa o arquivo de rota do usuario
 var fotoRouter = require("./src/routes/foto")
 
+var dashboardRouter = require("./src/routes/dashboard");
+
 
 //Tive que adicionar um novo limite para as imagens de camera serem inseridas,
 //caso contrario, as imagens seriam bloqueadas por serem muito pesadas
@@ -36,6 +38,7 @@ app.use("/usuarios", usuarioRouter);
 //Registra as rotas no Express. Qualquer chamada para /fotos/... será tratada pela fotoRouter dentro do app.use
 app.use("/fotos", fotoRouter);
 
+app.use("/dashboard", dashboardRouter);
 
 
 app.listen(PORTA_APP, function () {
