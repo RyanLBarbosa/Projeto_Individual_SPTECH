@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+@import url('https://googleapis.com');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+
+.barra-lateral {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, #696969 0%, #090909 40%, #090909 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 36px;
+    color: #ffffff;
+}
+
+.logo {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    max-width: 155px;
+    height: auto;
+    display: block;
+    filter: invert(100%);
+}
+
+.saudacao {
+    font-family: Birthstone;
+    font-size: 46px;
+    font-weight: 400;
+    color: #f3f3f3;
+    margin-bottom: 105px;
+    text-align: center;
+}
+
+.navegacao {
+    width: 100%;
+    flex: 1;
+}
+
+.navegacao ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+}
+
+.navegacao a {
+    font-family: Outfit;
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 22px;
+    font-weight: 400;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.navegacao a:hover,
+.navegacao a.ativo {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.botoes {
+    margin-top: auto;
+}
+
+.sair {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: outfit;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.sair:hover {
+    opacity: 0.8;
+}
+
+.conteudo-principal {
+    margin-left: 250px;
+    padding: 36px 48px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background-image: url(../assets/background_dash.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cabecalho h1 {
+    font-family: Outfit;
+    font-size: 34px;
+    font-weight: 400;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+.cards-resumo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.card {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.card h3 {
+    font-family: Outfit;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.card .destaque {
+    font-family: Outfit;
+    font-size: 25px;
+    color: #2b2b2b;
+    line-height: 1.3;
+}
+
+.card .destaque strong {
+    font-weight: 700;
+    color: #000000;
+}
+
+.card .destaque .verde {
+    color: #4ea832;
+    font-weight: 600;
+}
+
+.card .subtexto {
+    font-family: Outfit;
+    font-size: 17px;
+    font-weight: 600;
+    color: #4ea832;
+}
+
+.area-graficos {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 28px;
+    flex: 1;
+}
+
+.box-grafico {
+    background-color: #efefef;
+    border-radius: 10px;
+    min-height: 250px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* ÁREA DOS GRÁFICOS */
+.area-graficos {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 35px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* CONTAINER INDIVIDUAL */
+.box-grafico {
+    background-color: #EEEEEE;
+    height: 370px;
+    padding: 15px;
+    position: relative;
+    box-sizing: border-box;
+    min-width: 0;
+
+}
+
+.box-grafico h3 {
+text-align: center;
+margin-bottom: 20px;
+font-family: Outfit;
+font-weight: 600;
+font-size: 22px;
+}
+
+.sair img{
+    width: 30px;
+    height: auto;
+    filter: invert(100%);
+}
