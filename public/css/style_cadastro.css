@@ -223,11 +223,11 @@ button {
 }
 
 #cadastro_efetuado {
-    color: #03a526;
-    font-family: Inter;
-    font-weight: 800;
+    color: #55dc72;
+    font-family: Outfit;
+    font-weight: 600;
     text-decoration: underline;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .botoes button {
@@ -253,4 +253,40 @@ button {
   font-family: outfit;
 }
 
+.popover-requisitos {
+    background-color: white;
+    border: 1px solid #8CC2D5;
+    border-radius: 5px;
+    line-height: 0;
 
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 260px;
+    
+    font-size: 15px;
+}
+
+.popover-requisitos p {
+    margin-left: 10px;
+}
+
+.validacoes {
+    margin-left: 22px;
+    line-height: 0.01;
+    list-style-type: disc;
+}
+
+.senha {
+    top: 100%;
+    position: relative;
+}
+.senha:focus-within .popover-requisitos {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
