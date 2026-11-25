@@ -67,7 +67,7 @@ function buscarFotosPorMes(idUsuario){
     FROM foto 
     WHERE fk_usuario = ${idUsuario} AND YEAR(dtCaptura) = YEAR(CURRENT_DATE)
     GROUP BY MONTH(dtCaptura)
-    ORDER BY mes DESC;`;
+    ORDER BY mes ASC;`;
 
     return database.executar(instrucaoSql);
 };
