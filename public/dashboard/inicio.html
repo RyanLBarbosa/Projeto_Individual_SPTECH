@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENZ - Dashboard</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link
+        href="https://googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style_inicio.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <div class="logo">
+            <img src="../assets/LENZ.png" alt="Logotipo">
+        </div>
+
+        <p class="saudacao">Olá, usuário</p>
+
+        <nav class="navegacao">
+            <ul>
+                <li><a href="../dashboard/inicio.html "class="ativo">Início</a></li>
+                <li><a href="../dashboard/inspiracoes.html">Inspirações</a></li>
+                <li><a href="../dashboard/galeria.html">Galeria</a></li>
+                <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <div class="botoes">
+            <a href="../index.html" class="sair">
+                Sair
+                <img src="../assets/exit.png" alt="icon-sair">
+            </a>
+        </div>
+    </aside>
+
+    <main class="conteudo-principal">
+    <section id="hero" class="hero">
+
+        <!--Meio-->
+        <div class="meio">
+            <div class="moldura">
+                <h1 class="titulo-principal">
+                    Bem-vindo ao seu painel! <p> O seu próximo grande registro começa aqui.</p>
+                </h1>
+            </div>
+            <p class="descricao">Sem ideias para o próximo clique? <br>Dê uma passada na tela de inspirações
+                e descubra novos ângulos para sua próxima prática. </p>
+                <a href="../dashboard/inspiracoes.html"><button>Explorar inspirações ➜</button></a>
+            
+        </div>
+    </section>
+    </main>
+</body>
+
+</html>
+
+<script>
+    //Carrega a página e faz a verificação se o usuário está logado, caso não esteja, é redirecionado ao index
+    window.onload = function () {
+        const idUsuario = sessionStorage.ID_USUARIO;
+        const nomeUsuario = sessionStorage.NOME_USUARIO;
+        console.log("Aqui tem o id do usuario:", idUsuario)
+        console.log("Aqui tem o nome do usuario", nomeUsuario)
+
+        // Personaliza a saudação na tela com o nome do usuário logado
+        const elementoSaudacao = document.querySelector('.saudacao');
+        if (elementoSaudacao && nomeUsuario) {
+            elementoSaudacao.innerText = `Olá, ${nomeUsuario}`;
+        }
+
+        if (!idUsuario) {
+            alert("Você precisa fazer login para ver a dashboard!!!")
+            window.location = "index.html";
+            return;
+        }
+    }
+</script>
