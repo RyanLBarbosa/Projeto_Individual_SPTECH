@@ -1,105 +1,243 @@
-<img src="https://user-images.githubusercontent.com/46379117/192358781-9ca879e4-e55e-4d0d-b876-f9a4a2ed9ae8.png" width="600px">
+# LENZ - Fotografia e sua relação com o tempo
 
-_Web Data Visualization = Visualização de Dados na Web_
+O **LENZ** é uma aplicação web voltada à experiência fotográfica. A proposta é permitir que o usuário conheça mais sobre o criador, entenda o por quê do projeto, permitir que voocê registre suas fotografias, organize seus registros por categorias, encontre referências para novos cliques e acompanhe sua atividade fotográfica ao longo do tempo.
 
-_Implementação de Referência para o seu Projeto de Primeiro Semestre_
+## Funcionalidades
 
-<hr>
+- **Cadastro e login:** criação de conta e autenticação de usuários.
+- **Início:** página de boas-vindas e acesso às áreas da aplicação.
+- **Inspirações:** apresentação de fotógrafos e fotografias de referência. O conteúdo desta página está definido diretamente no JavaScript.
+- **Galeria pessoal:** envio de imagens, seleção de categoria, descrição, visualização e exclusão de fotografias.
+- **Dashboard:** apresentação de indicadores e gráficos sobre os registros do usuário:
+  - quantidade total de fotos;
+  - fotos adicionadas no mês atual;
+  - sequência de semanas com registros (*streak*);
+  - média mensal de fotos;
+  - quantidade de fotos por mês;
+  - distribuição de fotos por categoria.
 
-# Como usar
+## Tecnologias utilizadas
 
-1. Clone este repositório em sua máquina.
+### Front-end
+- HTML5
+- CSS3
+- JavaScript
+- [Chart.js](https://www.chartjs.org/) para os gráficos da dashboard
 
+### Back-end
+- Node.js
+- Express
+- Multer para recebimento e armazenamento dos arquivos de imagem
+- `mysql2` para comunicação com o banco de dados MySQL
+- `dotenv` para leitura das variáveis de ambiente
+- CORS
 
-1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.
-- Siga as instruções no arquivo **/src/database/script-tabelas.sql**
+## Organização do projeto
 
-
-3. Acesse o arquivo **app.js** e parametrize o ambiente.
-- Se você estiver utilizando o Ambiente de Produção (remoto), comente a linha 2 e deixe habilitada a linha 1 onde está o valor **var ambiente_processo = 'producao';**
-- Se você estiver utilizando o Ambiente de Desenvolvimento (local), comente a linha 1 e deixe habilitada a linha 2 onde está o valor **var ambiente_processo = 'desenvolvimento';**
-
-4. Adicione as credenciais de Banco de Dados no arquivo **.env** ou em **.env.dev**, seguindo as instruções neste.
-
-5. Acesse este repositório no seu terminal (GitBash ou VSCode) e execute os comandos abaixo:
-
+```text
+Projeto_Individual_SPTECH/
+├── app.js
+├── package.json
+├── README.md
+├── public/
+│   ├── assets/
+│   │   ├── imgs/galeria/       # Imagens enviadas pelos usuários
+│   │   └── inspiracoes/        # Imagens usadas na página de inspirações
+│   ├── css/                    # Folhas de estilo
+│   ├── dashboard/
+│   │   ├── inicio.html
+│   │   ├── inspiracoes.html
+│   │   ├── galeria.html
+│   │   └── dashboard.html
+│   ├── js/
+│   ├── index.html
+│   ├── login.html
+│   └── cadastro.html
+└── src/
+    ├── config/
+    │   └── configUpload.js
+    ├── controllers/
+    │   ├── usuarioController.js
+    │   ├── fotoController.js
+    │   └── dashboardController.js
+    ├── database/
+    │   ├── config.js
+    │   └── script-tabelas.sql
+    ├── models/
+    │   ├── usuarioModel.js
+    │   ├── fotoModel.js
+    │   └── dashboardModel.js
+    └── routes/
+        ├── usuarios.js
+        ├── foto.js
+        └── dashboard.js
 ```
-npm i
-``` 
-_O comando acima irá instalar as bibliotecas necessárias para o funcionamento do projeto. As bibliotecas a serem instaladas estão listadas no arquivo **package.json** então é muito importante que este não seja alterado. Será criada uma nova pasta/diretório chamado **node_modules** quando o comando for finalizado, que é onde as bibliotecas estão localizadas. Não altere a pasta/diretório._
 
+## Como executar o projeto
+
+### 1. Pré-requisitos
+
+Antes de iniciar, tenha instalado:
+
+- Node.js e npm;
+- MySQL Server;
+- um cliente MySQL, como MySQL Workbench (opcional, mas recomendado).
+
+### 2. Configurar o banco de dados
+
+1. Inicie o MySQL Server.
+2. Abra o arquivo `src/database/script-tabelas.sql`.
+3. Execute o script para criar o banco `lenz`, as tabelas e as categorias iniciais.
+
+O banco possui três tabelas principais:
+
+| Tabela | Finalidade |
+|---|---|
+| `usuario` | Armazena os dados das contas cadastradas. |
+| `categoria` | Armazena as categorias disponíveis para classificar fotografias. |
+| `foto` | Armazena os dados de cada fotografia e seus relacionamentos com usuário e categoria. |
+
+### 3. Configurar as variáveis de ambiente
+
+O `app.js` está configurado inicialmente para carregar o arquivo `.env.dev`, correspondente ao ambiente de desenvolvimento.
+
+Crie ou ajuste esse arquivo na raiz do projeto com as variáveis abaixo:
+
+```env
+AMBIENTE_PROCESSO=desenvolvimento
+
+DB_HOST=localhost
+DB_DATABASE=lenz
+DB_USER=seu_usuario_mysql
+DB_PASSWORD=sua_senha_mysql
+DB_PORT=3306
+
+APP_PORT=3333
+APP_HOST=localhost
 ```
+
+Ajuste usuário, senha, porta e demais valores de acordo com a configuração do seu computador.
+
+> **Segurança:** não publique arquivos `.env` ou `.env.dev` com credenciais reais. Eles devem permanecer fora do Git. Para compartilhar o projeto, disponibilize apenas um arquivo de exemplo, como `.env.example`, com valores fictícios.
+
+### 4. Instalar as dependências
+
+No terminal, dentro da pasta do projeto, execute:
+
+```bash
+npm install
+```
+
+### 5. Iniciar a aplicação
+
+Para iniciar o servidor:
+
+```bash
 npm start
-``` 
+```
 
-_O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a sua parametrização feita nos passos anteriores._
+Também existe o comando de desenvolvimento:
 
-6. Para "ver" seu projeto funcionando, acesse em seu navegador o caminho **informado no terminal**.
+```bash
+npm run dev
+```
 
-7. Caso queira parar a execução, tecle **CTRL+C** no terminal em que o projeto está rodando.
+Esse segundo comando utiliza o Nodemon para reiniciar o servidor quando arquivos monitorados forem alterados.
 
-## Adicionar novo recurso ao projeto
+### 6. Acessar no navegador
 
-**"Recurso? O que é?"** Enquanto no Banco de Dados chamamos as tabelas de "entidades", quando tratamos de desenvolvimento WEB usamos a palavra "recurso" para se referir a algo que podemos criar, ler, atualizar ou deletar [1]. Estas ações são conhecidas como CRUD: Create, Read, Update e Delete. Para acessar cada ação, usamos os métodos HTTP: POST, GET, PUT e DELETE [2]. (Há outros verbos, porém com estes já conseguimos efetuar CRUDs). 
+Abra o endereço configurado em `APP_HOST` e `APP_PORT`. Com a configuração de exemplo acima:
 
-**Tabela para ajudar a fazer a associação**
+```text
+http://localhost:3333
+```
 
-<table>
-  <tr>
-    <th>C.R.U.D</th>
-    <th>Ação</th>
-    <th>Tradução</th>
-    <th>Verbo HTTP *</th>
-    <th>Comando BD</th>
-  </tr>
-  <tr>
-    <td>C</td>
-    <td>Create</td>
-    <td>Criar</td>
-    <td>POST</td>
-    <td>INSERT</td>
-  </tr>
-  <tr>
-    <td>R</td>
-    <td>Read</td>
-    <td>Ler</td>
-    <td>GET</td>
-    <td>SELECT</td>
-  </tr>
-  <tr>
-    <td>U</td>
-    <td>Update</td>
-    <td>Atualizar</td>
-    <td>PUT</td>
-    <td>UPDATE</td>
-  </tr>
-  <tr>
-    <td>D</td>
-    <td>Delete</td>
-    <td>Deletar</td>
-    <td>DELETE</td>
-    <td>DELETE</td>
-  </tr>
-</table>
+Para encerrar o servidor, pressione `Ctrl + C` no terminal.
 
-_* Você verá o verbo HTTP sendo apontado nos arquivos em /routes_
+## Fluxo de funcionamento
 
-**"E no meu projeto, o que seria um recurso?"** Em web-data-viz manipulamos os recursos **usuário**, **aviso** e **medida**. Podemos conferir isso vendo para quais entidades foram criados os caminhos de inserção e captura de dados, que envolve os diretórios **routes**, **controllers** e **models**.
+A aplicação utiliza uma arquitetura em camadas. De forma geral, o caminho de uma operação que precisa do banco de dados é:
 
-Abaixo, uma figura que ajuda a compreender o caminho percorrido para, por exemplo, efetuar o cadastro de um usuário:
+```text
+Página HTML / JavaScript
+        |
+        | requisição HTTP (fetch)
+        v
+      Routes
+        |
+        v
+    Controller
+        |
+        v
+      Model
+        |
+        v
+   MySQL Database
+        |
+        v
+Resposta HTTP para o front-end
+```
 
+### 1. Cadastro e autenticação
 
-![image](https://github.com/user-attachments/assets/d576f178-0da6-437e-b5c9-658e3ebaf6ca)
+1. O usuário preenche o formulário em `cadastro.html` ou `login.html`.
+2. O JavaScript envia os dados para a API usando `fetch`.
+3. A rota em `src/routes/usuarios.js` recebe a requisição.
+4. `usuarioController.js` valida os campos e chama o model correspondente.
+5. `usuarioModel.js` executa o `INSERT` ou `SELECT` por meio da conexão configurada em `src/database/config.js`.
+6. O resultado retorna ao navegador. No login, os dados do usuário são utilizados para manter informações da sessão no `sessionStorage`.
 
+### 2. Envio e gerenciamento de fotografias
 
+O fluxo da galeria possui uma etapa adicional para lidar com arquivos:
 
-**Entendi o que é um recurso e gostaria de adicionar um novo ao meu projeto! Como faz?**  
-- Primeiro, crie a tabela no Banco de Dados referente a este recurso. Exemplos de recursos comuns de serem adicionados ao projeto no primeiro semestre: Silo, Aquário, Sala, Andar, Endereço, Mercado, Prateleira, Unidade, Carro, Caminhão...  
-- Assim que criada a tabela, faça todo o caminho de **front-end → routes → controllers → models** replicando o que já existe!  
-- Exemplo, se você quiser a funcionalidade de adicionar um novo Aquário, deve criar arquivos referentes ao aquario nos diretórios e replicar também as funções.  
-- Dica: A implementação de AVISO já contém o CRUD completo! :wink:
- 
-### Fontes bibliográficas
+1. O usuário seleciona uma imagem e informa categoria e descrição em `dashboard/galeria.html`.
+2. O JavaScript monta um `FormData` e envia uma requisição `POST` para `/fotos/cadastrar`.
+3. A rota `src/routes/foto.js` utiliza o Multer, configurado em `src/config/configUpload.js`, para receber o arquivo.
+4. O Multer salva a imagem em `public/assets/imgs/galeria/` e gera um nome de arquivo.
+5. `fotoController.js` recebe o nome do arquivo e os demais dados.
+6. `fotoModel.js` registra no MySQL o caminho/nome da imagem, a categoria, a descrição e o usuário relacionado.
+7. Para exibir a galeria, o front-end solicita as fotos do usuário pela rota de listagem. Para excluir, envia uma requisição `DELETE`.
+8. O navegador utiliza os dados recebidos para montar os elementos da galeria.
 
-[1] https://datatracker.ietf.org/doc/html/rfc2396  
-[2] https://datatracker.ietf.org/doc/html/rfc7231
+**Importante:** o arquivo da imagem fica armazenado na pasta do projeto; o banco de dados guarda o nome/caminho utilizado para localizar esse arquivo e os demais metadados.
+
+### 3. Dashboard e indicadores
+
+1. Ao abrir `dashboard/dashboard.html`, o JavaScript identifica o usuário pelo `sessionStorage`.
+2. O front-end realiza requisições `GET` para as rotas de dashboard.
+3. `dashboardController.js` recebe cada requisição e chama a função correspondente em `dashboardModel.js`.
+4. O model executa consultas SQL que calculam os indicadores e agrupam as fotografias por mês e categoria.
+5. Os resultados retornam em JSON.
+6. O JavaScript atualiza os indicadores da página e utiliza o Chart.js para desenhar os gráficos.
+
+### 4. Página de inspirações
+
+A página `dashboard/inspiracoes.html` funciona de maneira diferente das áreas anteriores: os dados dos fotógrafos e as referências de imagens estão definidos em um array JavaScript no próprio arquivo. Portanto, no estado atual do repositório, essa página não depende de uma consulta à API ou ao banco de dados.
+
+## Rotas da API
+
+| Método | Endpoint | Finalidade |
+|---|---|---|
+| `POST` | `/usuarios/cadastrar` | Cadastrar um usuário. |
+| `POST` | `/usuarios/autenticar` | Autenticar um usuário. |
+| `POST` | `/fotos/cadastrar` | Enviar uma imagem e registrar seus dados. |
+| `GET` | `/fotos/listar/:fk_usuario` | Listar as fotos de um usuário. |
+| `DELETE` | `/fotos/deletar/:idFoto/:fk_usuario` | Excluir uma foto pertencente ao usuário. |
+| `GET` | `/dashboard/total-fotos/:idUsuario` | Consultar o total de fotos. |
+| `GET` | `/dashboard/fotos-mes-atual/:idUsuario` | Consultar as fotos adicionadas no mês atual. |
+| `GET` | `/dashboard/streak/:idUsuario` | Consultar a quantidade de semanas com registros. |
+| `GET` | `/dashboard/media-mensal/:idUsuario` | Consultar a média mensal de fotos. |
+| `GET` | `/dashboard/fotos-mes/:idUsuario` | Consultar a quantidade de fotos por mês no ano atual. |
+| `GET` | `/dashboard/categorias/:idUsuario` | Consultar a quantidade de fotos por categoria. |
+
+## Observações
+
+- As páginas internas utilizam o `sessionStorage` para recuperar o identificador e o nome do usuário.
+- As imagens enviadas ficam no armazenamento local do servidor, dentro de `public/assets/imgs/galeria/`.
+- As inspirações são conteúdo estático no JavaScript, enquanto a galeria e a dashboard consultam a API e o MySQL.
+- O script SQL cria as categorias iniciais utilizadas pelo formulário da galeria. Caso as categorias sejam alteradas no banco, os valores apresentados no formulário também precisam ser compatibilizados.
+
+## Importante
+- O projeto tem fins estritamente acadêmico e foi criada somente para testes. Sua comercialização não é permitida. Todos os direitos reservados a Ryan Leão.
+
