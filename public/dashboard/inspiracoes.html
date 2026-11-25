@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENZ - Dashboard</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link
+        href="https://googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style_inspiracoes.css">
+</head>
+
+<body>
+    <aside class="barra-lateral">
+        <div class="logo">
+            <img src="../assets/LENZ.png" alt="Logotipo">
+        </div>
+
+        <p class="saudacao">Olá, usuário</p>
+
+        <nav class="navegacao">
+            <ul>
+                <li><a href="../dashboard/inicio.html">Início</a></li>
+                <li><a href="../dashboard/inspiracoes.html" class="ativo">Inspirações</a></li>
+                <li><a href="../dashboard/galeria.html">Galeria</a></li>
+                <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <div class="botoes">
+            <a href="../index.html" class="sair">
+                Sair
+                <img src="../assets/exit.png" alt="icon-sair">
+            </a>
+        </div>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div class="pagina-inspiracoes">
+
+            <!-- CABEÇALHO -->
+            <header class="cabecalho">
+
+                <h1>Inspire-se</h1>
+
+                <nav class="filtros" id="filtros-fotografos">
+                    <!-- Botões gerados pelo JavaScript -->
+                </nav>
+
+            </header>
+
+
+            <!-- ÁREA DE DESTAQUE -->
+            <section class="destaque">
+
+                <div class="identificacao">
+                    <p class="categoria-numero" id="categoria-numero"></p>
+                    <h2 id="nome-fotografo"></h2>
+                    <span id="linha-periodo"></span>
+                </div>
+
+                <div class="conteudo-destaque">
+
+                    <!-- FOTOGRAFIA PRINCIPAL -->
+                    <div class="imagem-principal">
+
+                        <img id="foto-destaque" src="" alt="Fotografia em destaque">
+                    
+                    </div>
+
+
+                    <!-- INFORMAÇÕES DO FOTÓGRAFO -->
+                    <div class="informacoes">
+
+                        <span class="etiqueta" id="categoria-fotografo"></span>
+
+                        <div class="descricao">
+                            <p id="descricao-fotografo"></p>
+                            <p id="biografia-fotografo"></p>
+                        </div>
+
+                        <p class="dados-tecnicos" id="dados-tecnicos"></p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- GALERIA DE FOTOGRAFIAS -->
+            <section class="secao-galeria">
+
+                <div class="galeria-fotos" id="galeria-fotos">
+                    <!-- Miniaturas geradas pelo JavaScript -->
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    </main>
+</body>
+
+</html>
+
+<script>
+    //Carrega a página e faz a verificação se o usuário está logado, caso não esteja, é redirecionado ao index
+    window.onload = function () {
+        const idUsuario = sessionStorage.ID_USUARIO;
+        const nomeUsuario = sessionStorage.NOME_USUARIO;
+        console.log("Aqui tem o id do usuario:", idUsuario)
+        console.log("Aqui tem o nome do usuario", nomeUsuario)
+
+        // Personaliza a saudação na tela com o nome do usuário logado
+        const elementoSaudacao = document.querySelector('.saudacao');
+        if (elementoSaudacao && nomeUsuario) {
+            elementoSaudacao.innerText = `Olá, ${nomeUsuario}`;
+        }
+
+        if (!idUsuario) {
+            alert("Você precisa fazer login para ver a dashboard!!!")
+            window.location = "index.html";
+            return;
+        }
+    }
+
+
+const inspiracoes = [
+        {
+        nome: "Ryan Leão",
+        categoria: "Variedades",
+
+        descricao: "Fotógrafo por hobby e criador do projeto Lenz, busco registrar diferentes momentos e sempre atribuir um significado a cada clique. Meu objetivo é guardar, em cada imagem, os sentimentos que eu estava vivendo naquele instante, podendo revisita-lo e viver um pouco daquele momento que já passou.",
+
+        biografia: "Nascido e criado em São Paulo em 2008, sempre busquei explorar a riqueza cultural da cidade, visitando museus e pontos turísticos. Faço questão de atribuir valor a cada registro, guardando essas fotos como recordações para a vida toda.",
+
+        fotos: [
+            {
+                caminho: "../assets/inspiracoes/ryan-0.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/ryan-1.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/ryan-2.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/ryan-3.jpg",
+            }
+        ]
+    },
+
+    {
+        nome: "Sebastião Salgado",
+        categoria: "Retrato",
+
+        descricao: "Mineiro formado em Economia, abandonou a carreira para viajar por mais de 120 países retratando, com profundo respeito, a luta de trabalhadores e refugiados nas séries Trabalhadores e Êxodos.",
+
+        biografia: "Depois voltou suas lentes para a grandiosidade da natureza intacta e dos povos indígenas em Gênesis e Amazônia. Também foi ambientalista e fundou o Instituto Terra para reflorestar a Mata Atlântica.",
+
+        fotos: [
+            {
+                caminho: "../assets/inspiracoes/sebastiao-0.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/sebastiao-1.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/sebastiao-2.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/sebastiao-3.jpg",
+            }
+        ]
+    },
+
+    {
+        nome: "Luciano Candisani",
+        categoria: "Paisagem e ambiente",
+
+        descricao: "Luciano Candisani é fotógrafo e autor brasileiro dedicado a temas etnográficos e ambientais. Sua obra trata sobre populações tradicionais, natureza e conservação de ecossistemas e espécies ao redor do mundo: trabalhou em 40 países, incluindo as regiões geladas do Ártico e Antártica.",
+
+        biografia:"Aprendeu a fotografar debaixo d'água de forma autodidata na adolescência, no litoral. Ainda como estudante e estagiário ligados à USP, participou de expedições científicas como mergulhador e fotógrafo.",
+
+        fotos: [
+            {
+                caminho: "../assets/inspiracoes/luciano-0.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/luciano-1.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/luciano-2.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/luciano-3.jpg",
+            }
+        ]
+    },
+
+    {
+        nome: "Jonne Roriz",
+        categoria: "Esportiva",
+
+        descricao: "Fotojornalista esportivo conhecido por unir técnica jornalística a um olhar criativo e experimental, com grande destaque para a fotografia subaquática.",
+        biografia: "Nascido em Salvador (BA) em 1977 e radicado em São Paulo, Jonne Roriz atuou em grandes veículos como A Tarde e O Estado de S. Paulo antes de seguir carreira independente. Cobriu cinco Jogos Olímpicos e três Copas do Mundo, acumulando prêmios internacionais como o POYi, o Siena International Photo Awards e o World Sports Photography Awards.",
+
+        fotos: [
+            {
+                caminho: "../assets/inspiracoes/jonne-0.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/jonne-1.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/jonne-2.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/jonne-3.jpg",
+            }
+        ]
+    },
+
+    {
+        nome: "Rafael Pavarotti",
+        categoria: "Moda",
+
+        descricao: "Fotógrafo de moda conhecido pelo estilo vibrante e teatral, marcado por cores intensas e pela forte representatividade negra e indígena. Suas imagens transformam a moda em arte e já estamparam capas da Vogue internacional e campanhas da Dior e da Gucci.",
+
+        biografia: "Nascido em Belém (PA) em 1993 e radicado em Londres, Rafael Pavarotti conquistou a moda mundial ao clicar estrelas como Beyoncé, Rihanna e Harry Styles. Foi o primeiro fotógrafo brasileiro a ter uma exposição individual no Musée des Arts Décoratifs, em Paris.",
+
+        fotos: [
+            {
+                caminho: "../assets/inspiracoes/rafael-0.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/rafael-1.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/rafael-2.jpg",
+            },
+            {
+                caminho: "../assets/inspiracoes/rafael-3.jpg",
+            }
+        ]
+    }
+];
+
+
+//Guarda o fotógrafo e a fotografia atualmente selecionados
+let fotografoAtual = 0;
+let fotoAtual = 0;
+
+
+//CARREGA OS BOTÕES DOS FOTÓGRAFOS
+function carregarBotoes() {
+
+    const filtros = document.getElementById("filtros-fotografos");
+
+    filtros.innerHTML = "";
+
+    inspiracoes.forEach((fotografo, indice) => {
+
+        const botao = document.createElement("button");
+
+        botao.className = "filtro";
+        botao.innerText = fotografo.nome;
+
+        botao.addEventListener("click", () => {
+            carregarFotografo(indice);
+        });
+        filtros.appendChild(botao);
+
+    });
+
+}
+
+
+//CARREGA AS INFORMAÇÕES DO FOTÓGRAFO
+function carregarFotografo(indice) {
+
+    fotografoAtual = indice;
+
+    fotoAtual = 0;
+
+    const fotografo = inspiracoes[fotografoAtual];
+
+    //Atualiza os botões
+    const botoes = document.querySelectorAll(".filtro");
+
+    botoes.forEach((botao, i) => {
+        botao.classList.toggle("ativo", i === indice);
+    });
+
+
+    //Atualiza as informações
+    document.getElementById("nome-fotografo").innerText =
+        fotografo.nome;
+
+    document.getElementById("categoria-fotografo").innerText =
+        fotografo.categoria;
+
+    document.getElementById("descricao-fotografo").innerText =
+        fotografo.descricao;
+
+    document.getElementById("biografia-fotografo").innerText =
+        fotografo.biografia;
+
+    //Atualiza a galeria
+    carregarGaleria();
+
+    //Exibe a primeira fotografia
+    trocarFoto(0);
+
+}
+
+//CARREGA AS MINIATURAS DA GALERIA
+function carregarGaleria() {
+
+    const galeria = document.getElementById("galeria-fotos");
+
+    const fotografo = inspiracoes[fotografoAtual];
+
+    galeria.innerHTML = "";
+
+    fotografo.fotos.forEach((foto, indice) => {
+
+        const miniatura = document.createElement("button");
+
+        miniatura.className = "miniatura";
+
+        miniatura.innerHTML = `
+            <img src="${foto.caminho}" alt="${foto.legenda}">
+            <span class="numero-miniatura">
+                ${String(indice).padStart(2, "0")}
+            </span>
+        `;
+
+        miniatura.addEventListener("click", () => {
+
+            trocarFoto(indice);
+
+        });
+        galeria.appendChild(miniatura);
+    });
+
+}
+
+
+//Troca de fotografo
+function trocarFoto(indice) {
+
+    fotoAtual = indice;
+
+    const fotografo = inspiracoes[fotografoAtual];
+
+    const foto = fotografo.fotos[fotoAtual];
+
+    //troca a imagem principal
+    document.getElementById("foto-destaque").src = foto.caminho;
+
+    //atualiza o texto da imagem
+    document.getElementById("foto-destaque").alt = foto.legenda;
+
+    //legenda da foto
+    document.getElementById("legenda-foto").innerText = foto.legenda;
+
+    //destaca a miniatura selecionada
+    const miniaturas = document.querySelectorAll(".miniatura");
+
+    miniaturas.forEach((miniatura, i) => {
+
+        miniatura.classList.toggle("ativo", i === indice);
+
+    });
+
+}
+
+//inicialização da página
+carregarBotoes();
+carregarFotografo(0);
+
+</script>
