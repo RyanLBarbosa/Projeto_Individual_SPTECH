@@ -103,6 +103,7 @@ body {
 
 .conteudo-galeria {
     margin-left: 250px; 
+    background-image: url(../assets/background_dash.png);
     width: calc(100% - 250px);
     min-height: 100vh;
     padding: 30px;
@@ -121,13 +122,18 @@ body {
     margin-bottom: 30px;
 }
 
+.header-galeria h1{
+font-family: Outfit;
+font-weight: 500;
+}
+
 .btn-adicionar {
     background-color: #111827;
     color: white;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
@@ -373,4 +379,9 @@ textarea {
 
 .btn-excluir:hover {
     background-color: #dc2626;
+}
+.sair img{
+    width: 30px;
+    height: auto;
+    filter: invert(100%);
 }
